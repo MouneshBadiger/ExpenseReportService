@@ -40,10 +40,10 @@ public class ReportController {
 		return ResponseEntity.notFound().build();
 		
 	}
-	@GetMapping("/expenseClaim/{userId}")
-	public ResponseEntity<List<ExpenseClaim>> expenseClaim( @PathVariable  String userId){
+	@GetMapping("/expenseClaim/registered/{userId}")
+	public ResponseEntity<List<ExpenseClaim>> expenseClaimRegistered( @PathVariable  String userId){
 		try {
-				List<ExpenseClaim> list=registerClaimService.getExpenseClaimAll(userId);
+				List<ExpenseClaim> list=registerClaimService.expenseClaimRegistered(userId);
 					return ResponseEntity.ok(list);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -51,6 +51,40 @@ public class ReportController {
 		return ResponseEntity.notFound().build();
 		
 	}
+	@GetMapping("/expenseClaim/approved/{userId}")
+	public ResponseEntity<List<ExpenseClaim>> expenseClaimApproved( @PathVariable  String userId){
+		try {
+				List<ExpenseClaim> list=registerClaimService.getExpenseClaimApproved(userId);
+					return ResponseEntity.ok(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.notFound().build();
+		
+	}
+	@GetMapping("/expenseClaim/manager/approved/{userId}")
+	public ResponseEntity<List<ExpenseClaim>> expenseClaimPendingManager( @PathVariable  String userId){
+		try {
+				List<ExpenseClaim> list=registerClaimService.expenseClaimApprovedManager(userId);
+					return ResponseEntity.ok(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.notFound().build();
+		
+	}
+	@GetMapping("/expenseClaim/manager/pending/{userId}")
+	public ResponseEntity<List<ExpenseClaim>> expenseClaimApprovedManager( @PathVariable  String userId){
+		try {
+				List<ExpenseClaim> list=registerClaimService.expenseClaimPendingManager(userId);
+					return ResponseEntity.ok(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.notFound().build();
+		
+	}
+	
 	
 
 }
